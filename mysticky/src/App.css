@@ -28,3 +28,9 @@ body {
 .sticky-content {
   padding: 1rem;
 }
+
+.modal-container {
+  width: 500px;
+  height: 500px;
+  background: #A2B6BC;
+}

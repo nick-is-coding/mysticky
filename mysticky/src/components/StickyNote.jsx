@@ -1,18 +1,12 @@
 import React from 'react';
 
-const StickyNote = () => {
+const StickyNote = ({subject, text}) => {
 
 return (
     <div className='sticky-note'>
         <div className='sticky-content'>
-            <div>
-                <h3>SUBJECT</h3>
-            </div>
-            <div>
-                <span>
-                    My first sticky :3
-                </span>
-            </div>
+                <h3>{subject}</h3>
+                <span>{text}</span>
         </div>
     </div>
 )
