@@ -1,15 +1,11 @@
 import React from 'react';
 
-const AddButton = () => {
-
-
-    return (
-        <div>
-            <button>add sticky</button>
-        </div>
-    )
-
-
-}
+const AddButton = ({ onClick }) => {
+  return (
+    <div>
+      <button onClick={onClick}>add sticky</button>
+    </div>
+  );
+};
 
 export default AddButton;
