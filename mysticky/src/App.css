@@ -33,4 +33,6 @@ body {
   width: 500px;
   height: 500px;
   background: #A2B6BC;
+  position: absolute;
+  top: 10rem;
 }
