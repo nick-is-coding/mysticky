@@ -1,3 +1,10 @@
+/* Main */
+
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
 body {
   background-color: #A2BCA6;
   margin: 1rem;
@@ -10,6 +17,15 @@ body {
   justify-content: center;
 }
 
+/* Sticky Note */
+
+.sticky-note-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 80px;
+}
+
 .sticky-container {
   display: flex;
   flex-wrap: wrap;
@@ -17,8 +33,8 @@ body {
 }
 
 .sticky-note {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   background: #FFECBC;
   box-shadow: 0px 2px 3px 3px rgba(107, 77, 0, 0.4);
   transform: matrix(1, 0.03, -0.02, 1, 0, 0);
@@ -29,10 +45,62 @@ body {
   padding: 1rem;
 }
 
+/* Modal Container */
+
 .modal-container {
-  width: 500px;
+  width: 700px;
   height: 500px;
   background: #A2B6BC;
   position: absolute;
-  top: 10rem;
+  top: 15rem;
+  box-shadow: 0px 2px 3px 3px rgba(25, 24, 22, 0.4);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.add-sticky-button, .modal-container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-sticky-button button {
+  height: 70px;
+  width: 140px;
+}
+
+.modal-container button {
+  height: 45px;
+  width: 150px;
+}
+
+.modal-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.button-container h1 {
+  font-size: 7rem;
+  text-align: center;
+}
+
+.modal-container label {
+  padding: 10px 0px;
+}
+
+input.subject-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 3vh;
+}
+
+.text-input {
+  height: 30vh;
+  vertical-align: top;
+  padding-top: 5px;
 }

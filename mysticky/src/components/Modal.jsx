@@ -6,17 +6,28 @@ const Modal = ({newNoteSubject, newNoteText, setNewNoteSubject, setNewNoteText, 
     return (
         <Fragment>
             <div className='modal-container'>
+                <label htmlFor="#">Subject:</label>
                 <input 
+                    className='subject-input'
                     type="text"
                     value={newNoteSubject}
                     onChange={handleSubjectChange}
                  />
-                 <input 
+                 <label htmlFor="#">Notes:</label>
+                 <textarea 
+                    className='text-input'
                     type="text"
                     value={newNoteText}
                     onChange={handleTextChange}
                  />
-                <button onClick={() => addStickyNote(newNoteSubject, newNoteText)}>ADD NEW STICKY</button>
+                <div className='modal-button'>
+                    <button 
+                        className='add-sticky-button'
+                        onClick={() => addStickyNote(newNoteSubject, newNoteText)}
+                    >
+                        ADD NEW STICKY
+                    </button>
+                </div>
             </div>
         </Fragment>
     )
