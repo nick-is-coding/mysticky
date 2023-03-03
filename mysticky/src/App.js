@@ -1,6 +1,7 @@
 import './App.css';
 import '../src/font/font.css';
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import StickyNote from './components/StickyNote';
 import AddButton from './components/AddButton';
 import Modal from './components/Modal';
@@ -11,6 +12,16 @@ function App() {
   const [newNoteSubject, setNewNoteSubject] = useState('');
   const [newNoteText, setNewNoteText] = useState('');
   const [stickyNotes, setStickyNotes] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5001/users')
+      .then(response => {
+        setStickyNotes(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
 
     const toggleModal = () => {
@@ -28,10 +39,21 @@ function App() {
    
   const addStickyNote = () => {
     const newNote = {
-      id: Date.now(),
       subject: newNoteSubject,
       text: newNoteText
     };
+
+    axios.post('http://localhost:5001/users', newNote)
+    .then(response => {
+      console.log(response.data.message);
+      setStickyNotes([...stickyNotes, newNote]);
+      setNewNoteSubject('');
+      setNewNoteText('');
+      setIsModalOpen(false);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
     setStickyNotes([...stickyNotes, newNote]);
     setNewNoteSubject('');

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 
 
-const Modal = ({newNoteSubject, newNoteText, setNewNoteSubject, setNewNoteText, handleSubjectChange, handleTextChange, addStickyNote}) => {
+const Modal = ({newNoteSubject, newNoteText, handleSubjectChange, handleTextChange, addStickyNote}) => {
 
     return (
         <Fragment>
