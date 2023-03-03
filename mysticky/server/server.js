@@ -52,4 +52,18 @@ app.post('/users', async (req, res) => {
   }
 });
 
+app.delete('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query('DELETE FROM users WHERE id = $1', [id]);
+    await pool.query('COMMIT');
+
+    res.json({ message: `User ${id} deleted successfully` });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting user');
+  }
+});
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
