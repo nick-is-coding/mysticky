@@ -1,5 +1,5 @@
 import './App.css';
-import '../src/font/font.css';
+import 'typeface-inter';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import StickyNote from './components/StickyNote';
@@ -64,7 +64,7 @@ function App() {
   return (
     <div className='main-container'>
       <div className='button-container'>
-        <h1>mySticky</h1>
+        <h1>mySTICKY</h1>
         <AddButton onClick={toggleModal}/>
         <div className='sticky-note-container'>
         {stickyNotes.map((note) => (
