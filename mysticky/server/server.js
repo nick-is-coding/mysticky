@@ -42,15 +42,21 @@ app.post('/users', async (req, res) => {
   try {
     const { subject , text } = req.body;
 
-    const result = await pool.query('INSERT INTO users (subject, text) VALUES ($1, $2)', [subject, text]);
+    const result = await pool.query('INSERT INTO users (subject, text) VALUES ($1, $2) RETURNING id', [subject, text]);
     await pool.query('COMMIT');
 
-    res.json({ message: 'User added successfully' });
+    const newNoteId = result.rows[0].id; // get the ID of the newly inserted note
+
+    res.json({ message: 'User added successfully', newNoteId });
   } catch (err) {
     console.error(err);
     res.status(500).send('Error adding user');
   }
 });
+
+
+
+
 
 app.delete('/users/:id', async (req, res) => {
   try {
