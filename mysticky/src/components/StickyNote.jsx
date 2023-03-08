@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 
-const StickyNote = ({ id, subject, text, handleNoteDelete }) => {
+const StickyNote = ({ id, subject, text, handleNoteDelete, color }) => {
     const onDelete = async () => {
       console.log(id);
       await handleNoteDelete(id);
     };
   
     return (
-      <div className='sticky-note'>
+      <div className='sticky-note' style={{ backgroundColor: color }}>
         <div className='sticky-content'>
           <h3>{subject}</h3>
           <span>{text}</span>

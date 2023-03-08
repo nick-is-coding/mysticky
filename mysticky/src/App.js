@@ -12,6 +12,8 @@ function App() {
   const [newNoteSubject, setNewNoteSubject] = useState('');
   const [newNoteText, setNewNoteText] = useState('');
   const [stickyNotes, setStickyNotes] = useState([]);
+  const colors = ['#FFECBC', '#E0BBE4', '#BCE2E8', '#D6EAF8', '#F5CBA7', '#D5F5E3', '#FADBD8', '#FDEBD0'];
+
 
   useEffect(() => {
     axios.get('http://localhost:5001/users')
@@ -21,7 +23,7 @@ function App() {
       .catch(error => {
         console.log(error);
       });
-  }, []);
+  }, []);  
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -38,21 +40,31 @@ function App() {
   const addStickyNote = () => {
     const newNote = {
       subject: newNoteSubject,
-      text: newNoteText
+      text: newNoteText,
+      color: colors[Math.floor(Math.random() * colors.length)]
     };
   
     axios.post('http://localhost:5001/users', newNote)
       .then(response => {
         console.log(response.data.message);
-        console.log(response.data.newNoteId); // added line to log the ID of the new note
+        console.log(response.data.newNoteId);
         const newNoteWithId = {
           ...newNote,
-          id: response.data.newNoteId // set the ID of the new note based on the response data
+          id: response.data.newNoteId
         };
         setStickyNotes([...stickyNotes, newNoteWithId]);
         setNewNoteSubject('');
         setNewNoteText('');
         setIsModalOpen(false);
+
+        axios.put(`http://localhost:5001/users/${response.data.newNoteId}`, { color: newNote.color })
+  .then(response => {
+    console.log(response.data.message);
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
       })
       .catch(error => {
         console.log(error);
@@ -91,6 +103,7 @@ function App() {
               className='sticky-container' 
               key={note.id}
               id={note.id}
+              color={note.color}
               subject={note.subject} 
               text={note.text}
               handleNoteDelete={handleNoteDelete}

@@ -7,8 +7,6 @@ body {
   background:url(http://www.photoshopbuzz.com/wp-content/uploads/2012/07/cork.jpg);
 }
 
-/* Header Container  */
-
 /* Main Container  */
 
 .main-container {
@@ -27,8 +25,14 @@ body {
 }
 
 .button-container h1 {
-  font-size: 7vw;
-  transition: font-size 0.5s ease-out;
+  font-size: 10vw;
+  transition: font-size 0.5s ease-out; 
+  text-shadow: 2px 2px 0px  #957dad,
+  4px 4px 0px #ee4b2b,
+  6px 6px 0px #00c2cb,
+  8px 8px 0px #ff7f50,
+  10px 10px 0px #553c9a;
+  margin-bottom: 2rem;
 }
 
 /* ADD STICKY button */

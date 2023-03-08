@@ -31,12 +31,18 @@ pool.query('SELECT NOW()', (err, res) => {
 app.get('/users', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users');
-    res.json(result.rows);
+    res.json(result.rows.map(row => ({
+      id: row.id,
+      subject: row.subject,
+      text: row.text,
+      color: row.color
+    })));
   } catch (err) {
     console.error(err);
     res.status(500).send('Error getting users');
   }
 });
+
 
 app.post('/users', async (req, res) => {
   try {
@@ -54,8 +60,20 @@ app.post('/users', async (req, res) => {
   }
 });
 
+app.put('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { color } = req.body;
 
+    const result = await pool.query('UPDATE users SET color = $1 WHERE id = $2', [color, id]);
+    await pool.query('COMMIT');
 
+    res.json({ message: `User ${id} updated successfully` });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error updating user');
+  }
+});
 
 
 app.delete('/users/:id', async (req, res) => {
