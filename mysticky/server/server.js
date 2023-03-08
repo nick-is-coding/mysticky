@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { Pool } = require('pg');
+require('dotenv').config();
+
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -10,11 +12,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const pool = new Pool({
-  user: 'doadmin',
-  password: 'AVNS_wJlhiGuZFP4D64PYiud',
-  host: 'db-postgresql-nyc1-72255-do-user-13638499-0.b.db.ondigitalocean.com',
-  port: 25060,
-  database: 'defaultdb',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
   ssl: {
     rejectUnauthorized: false
   }
