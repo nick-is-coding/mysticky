@@ -162,6 +162,45 @@ input.subject-input {
   padding-top: 5px;
 }
 
+/* Thank You Animation */
+
+.thank-you {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.thank-you img {
+  max-width: 100%;
+  height: auto;
+}
+
+.thank-you.fade-out {
+  opacity: 0;
+}
+
+.thank-you p {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+
 /* Media Queries */
 
 @media (min-width: 768px) {

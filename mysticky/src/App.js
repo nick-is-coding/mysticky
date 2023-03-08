@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import StickyNote from './components/StickyNote';
 import AddButton from './components/AddButton';
 import Modal from './components/Modal';
+import ThankYou from './components/ThankYou';
 
 function App() {
 
@@ -24,6 +25,19 @@ function App() {
         console.log(error);
       });
   }, []);  
+
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [isNoteAdded, setIsNoteAdded] = useState(false);
+
+  useEffect(() => {
+    if (isNoteAdded) {
+      setShowThankYou(true);
+      setTimeout(() => {
+        setShowThankYou(false);
+        setIsNoteAdded(false);
+      }, 4000);
+    }
+  }, [isNoteAdded]);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -48,6 +62,7 @@ function App() {
       .then(response => {
         console.log(response.data.message);
         console.log(response.data.newNoteId);
+        setIsNoteAdded(true);
         const newNoteWithId = {
           ...newNote,
           id: response.data.newNoteId
@@ -122,6 +137,7 @@ function App() {
           addStickyNote={addStickyNote}
         />
         )}
+        {showThankYou && <ThankYou />}
       </div>
     </div>
   );
