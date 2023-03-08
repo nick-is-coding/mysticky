@@ -79,13 +79,11 @@ body {
   transform: matrix(1, 0.03, -0.02, 1, 0, 0);
   margin: 1rem;
   transition: all 0.5s ease;
-}
-
-.sticky-note {
   opacity: 0;
   animation-name: fadeInOut;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
+  overflow-y: scroll;
 }
 
 @keyframes fadeInOut {
@@ -93,14 +91,13 @@ body {
   100% { opacity: 1; }
 }
 
-
 .sticky-content {
   padding: 1rem;
-  height: 40vw;
+  height: 35vw;
   overflow-y: auto;
   word-wrap: break-word;
+  font-size: 1.2em;
 }
-
 
 /* Delete Button */
 
@@ -170,24 +167,21 @@ input.subject-input {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  opacity: 1;
+  opacity: .7;
   transition: opacity 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 100%;
   max-width: 500px;
   height: auto;
-  background-color: white;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .thank-you img {
   max-width: 100%;
-  height: auto;
+  height: 50vh;
 }
 
 .thank-you.fade-out {
@@ -218,7 +212,7 @@ input.subject-input {
     height: 40vw; 
   }
   .sticky-content {
-    height: 40vw; 
+    height: 35vw; 
   }
   .add-sticky-button button {
     height: 3.5em;

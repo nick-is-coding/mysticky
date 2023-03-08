@@ -73,13 +73,12 @@ function App() {
         setIsModalOpen(false);
 
         axios.put(`http://localhost:5001/users/${response.data.newNoteId}`, { color: newNote.color })
-  .then(response => {
-    console.log(response.data.message);
-  })
-  .catch(error => {
-    console.log(error);
-  });
-
+      .then(response => {
+          console.log(response.data.message);
+        })
+      .catch(error => {
+          console.log(error);
+        });
       })
       .catch(error => {
         console.log(error);
