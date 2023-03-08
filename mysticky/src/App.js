@@ -14,7 +14,8 @@ function App() {
   const [newNoteText, setNewNoteText] = useState('');
   const [stickyNotes, setStickyNotes] = useState([]);
   const colors = ['#FFECBC', '#E0BBE4', '#BCE2E8', '#D6EAF8', '#F5CBA7', '#D5F5E3', '#FADBD8', '#FDEBD0'];
-
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [isNoteAdded, setIsNoteAdded] = useState(false);
 
   useEffect(() => {
     axios.get('http://localhost:5001/users')
@@ -25,9 +26,6 @@ function App() {
         console.log(error);
       });
   }, []);  
-
-  const [showThankYou, setShowThankYou] = useState(false);
-  const [isNoteAdded, setIsNoteAdded] = useState(false);
 
   useEffect(() => {
     if (isNoteAdded) {

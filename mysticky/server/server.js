@@ -43,7 +43,6 @@ app.get('/users', async (req, res) => {
   }
 });
 
-
 app.post('/users', async (req, res) => {
   try {
     const { subject , text } = req.body;

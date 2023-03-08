@@ -57,6 +57,7 @@ body {
 }
 
 /* Sticky Note */
+
 .sticky-note-container {
   display: flex;
   flex-wrap: wrap;
@@ -86,17 +87,17 @@ body {
   overflow-y: scroll;
 }
 
-@keyframes fadeInOut {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
 .sticky-content {
   padding: 1rem;
   height: 35vw;
   overflow-y: auto;
   word-wrap: break-word;
   font-size: 1.2em;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* Delete Button */
@@ -108,7 +109,6 @@ body {
   background: none;
   border: none;
 }
-
 
 /* Modal Container */
 
@@ -193,7 +193,6 @@ input.subject-input {
   margin-top: 1rem;
   text-align: center;
 }
-
 
 /* Media Queries */
 

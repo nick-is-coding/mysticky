@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 const StickyNote = ({ id, subject, text, handleNoteDelete, color }) => {
     const onDelete = async () => {
