@@ -21,7 +21,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "npm run start-server & npm run start-client",
+    "start-server": "node server.js",
+    "start-client": "cd src && npm start"
   },
   "eslintConfig": {
     "extends": [

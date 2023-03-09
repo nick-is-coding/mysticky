@@ -18,7 +18,7 @@ function App() {
   const [isNoteAdded, setIsNoteAdded] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/users')
+    axios.get('http://localhost:5002/users')
       .then(response => {
         setStickyNotes(response.data);
       })
@@ -56,7 +56,7 @@ function App() {
       color: colors[Math.floor(Math.random() * colors.length)]
     };
   
-    axios.post('http://localhost:5001/users', newNote)
+    axios.post('http://localhost:5002/users', newNote)
       .then(response => {
         console.log(response.data.message);
         console.log(response.data.newNoteId);
@@ -70,7 +70,7 @@ function App() {
         setNewNoteText('');
         setIsModalOpen(false);
 
-        axios.put(`http://localhost:5001/users/${response.data.newNoteId}`, { color: newNote.color })
+        axios.put(`http://localhost:5002/users/${response.data.newNoteId}`, { color: newNote.color })
       .then(response => {
           console.log(response.data.message);
         })
@@ -85,7 +85,7 @@ function App() {
   
   
   const handleNoteDelete = (id) => {
-    return axios.delete(`http://localhost:5001/users/${id}`)
+    return axios.delete(`http://localhost:5002/users/${id}`)
       .then(response => {
         console.log(response.data.message);
         setStickyNotes(stickyNotes.filter(note => note.id !== id));
@@ -96,11 +96,6 @@ function App() {
       });
   };
   
-  const onDelete = (id) => {
-    console.log(id);
-    handleNoteDelete(id);
-  };
-
   return (
     <div className='cork-board'>
       <div className='main-container'>

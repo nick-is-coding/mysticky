@@ -1,0 +1,44 @@
+# Use an official Node runtime as a parent image
+FROM node:16
+
+# Set the working directory to the root of the application
+WORKDIR /mysticky
+
+# Copy the backend package.json and package-lock.json files to the container
+COPY package*.json ./
+
+# Install backend dependencies
+RUN npm install
+
+# Copy the rest of the backend files to the container
+COPY server/ ./
+
+# Set the working directory to the frontend directory
+WORKDIR /mysticky
+
+# Copy the frontend package.json and package-lock.json files to the container
+COPY package*.json ./
+
+# Install frontend dependencies
+RUN npm install
+
+# Copy the rest of the frontend files to the container
+COPY src/ ./src/
+
+COPY public/ ./public/
+
+# Set environment variables for the backend
+ENV DB_USER=doadmin
+ENV DB_PASSWORD=AVNS_wJlhiGuZFP4D64PYiud
+ENV DB_HOST=db-postgresql-nyc1-72255-do-user-13638499-0.b.db.ondigitalocean.com
+ENV DB_PORT=25060
+ENV DB_DATABASE=defaultdb
+
+# Expose the backend port
+EXPOSE 5002
+
+# Expose the frontend port
+EXPOSE 3000
+
+# Start the backend and frontend servers
+CMD ["npm", "run", "dev"]
