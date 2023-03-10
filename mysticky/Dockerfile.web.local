@@ -1,0 +1,10 @@
+FROM node:19.3.0 as base
+
+WORKDIR /home/node/app
+COPY src/web/package*.json ./
+COPY src/web/src ./src
+COPY src/web/public ./public
+RUN npm install
+
+FROM base as dev
+CMD npm run dev

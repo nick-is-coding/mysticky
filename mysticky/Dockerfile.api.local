@@ -1,0 +1,8 @@
+FROM node:19.3.0 as base
+WORKDIR /home/node/app
+COPY src/server/package.json ./
+COPY src/server/src ./src
+RUN npm install
+
+FROM base as api
+CMD npm run start
