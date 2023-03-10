@@ -66,4 +66,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-host: ${{ secrets.SSH_HOST }}
       - name: Spin Up Docker Image
-        run: ssh root@${{ secrets.SSH_HOST }} docker run $REGISTRY/$IMAGE:latest
+        run: ssh root@${{ secrets.SSH_HOST }} docker run $REGISTRY/$IMAGE:latest -d
