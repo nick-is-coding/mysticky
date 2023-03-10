@@ -11,7 +11,8 @@ const port = process.env.PORT || 5002;
 app.use(cors());
 app.use(bodyParser.json());
 
-const pool = new Pool(process.env.PG_CONNECTION_STRING, {
+const pool = new Pool({
+  connectionString: process.env.PG_CONNECTION_STRING,
   ssl: {
     rejectUnauthorized: false
   }
