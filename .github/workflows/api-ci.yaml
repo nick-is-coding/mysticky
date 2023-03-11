@@ -68,7 +68,7 @@ jobs:
       - name: Spin Up Docker Image
         run: |
           ssh root@${{ secrets.SSH_HOST }} \
-          docker run -d -3000:3000/tcp \
+          docker run -d -80:80/tcp \
             -e PORT=$PORT \
             -e PG_CONNECTION_STRING=$PG_CONNECTION_STRING \
             $REGISTRY/$IMAGE:latest

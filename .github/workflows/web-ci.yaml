@@ -73,3 +73,10 @@ jobs:
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Spin Up Docker Image
+        run: |
+          ssh root@${{ secrets.SSH_HOST }} \
+          docker run -d -3000:3000/tcp \
+            -e PORT=$PORT \
+            -e PG_CONNECTION_STRING=$PG_CONNECTION_STRING \
+            $REGISTRY/$IMAGE:latest
