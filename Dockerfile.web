@@ -9,6 +9,7 @@ COPY src/web/src ./src
 COPY src/web/public ./public
 
 FROM pre-build as build
+EXPOSE 80
 RUN npm run build
 
 FROM nginx:alpine as web

@@ -5,4 +5,5 @@ COPY src/server/src ./src
 RUN npm install
 
 FROM base as api
+EXPOSE 3000
 CMD npm run start

@@ -6,10 +6,8 @@ services:
       dockerfile: Dockerfile.web
     env_file:
       - src/web/.env
-    environment:
-      PORT: 8000
     ports:
-      - "8000:8000"
+      - "$PORT:$PORT"
 
   api:
     build:
@@ -17,7 +15,5 @@ services:
       dockerfile: Dockerfile.api
     env_file:
       - src/server/.env
-    environment:
-      PORT: 3000
     ports:
-      - "3000:3000"
+      - "$PORT:$PORT"
