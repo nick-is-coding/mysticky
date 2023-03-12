@@ -53,23 +53,33 @@ jobs:
       - name: Push Docker Image
         run: docker push $REGISTRY/$IMAGE:latest
 
-  deploy-web:
-    needs: build-web
-    runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, '~web') }}
-    environment: ${{ fromJSON('{"main":"prod"}')[github.ref_name] || github.ref_name }}
-    env:
-      PORT: ${{ vars.PORT }}
-    steps:
-      - name: Print Job Description
-        run: |
-          echo deploying \"$IMAGE\" from branch \"${{ github.ref_name }}\"
-      - name: Git Checkout
-        uses: actions/checkout@v3
-        with:
-          ssh-key: ${{ secrets.GIT_SSH_KEY }}
-          submodules: recursive
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+deploy-web:
+  needs: build-web
+  runs-on: ubuntu-latest
+  if: ${{ !contains(github.event.head_commit.message, '~web') }}
+  environment: ${{ fromJSON('{"main":"prod"}')[github.ref_name] || github.ref_name }}
+  env:
+    PORT: ${{ vars.PORT }}
+  steps:
+    - name: Print Job Description
+      run: |
+        echo deploying \"$IMAGE\" from branch \"${{ github.ref_name }}\"
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - name: Log in to remote Docker registry
+      run: doctl registry login --expiry-seconds 180 --context myremote
+    - name: Pull Docker image
+      run: |
+        docker --context myremote pull $REGISTRY/$IMAGE:latest
+    - name: Stop running container
+      run: |
+        docker --context myremote stop mysticky_web_1 || true
+    - name: Remove stopped container
+      run: |
+        docker --context myremote rm mysticky_web_1 || true
+    - name: Start new container with updated image
+      run: |
+        docker --context myremote run -d --name mysticky_web_1 \
+          -p $PORT:8000 $REGISTRY/$IMAGE:latest
