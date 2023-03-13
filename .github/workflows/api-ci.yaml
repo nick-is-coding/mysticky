@@ -54,6 +54,7 @@ jobs:
     environment: ${{ fromJSON('{"main":"prod"}')[github.ref_name] || github.ref_name }}
     env:
       CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
+      K8S_NAMESPACE: ${{ vars.K8S_NAMESPACE }}
       PG_CONNECTION_STRING: ${{ secrets.PG_CONNECTION_STRING }}
       PORT: ${{ vars.PORT }}
     steps:
