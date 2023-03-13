@@ -28,7 +28,6 @@ jobs:
     env:
       API_ENDPOINT: ${{ vars.API_ENDPOINT }}
       GENERATE_SOURCEMAP: ${{ vars.GENERATE_SOURCEMAP }}
-      K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
     steps:
       - name: Print Job Description
         run: |
@@ -60,6 +59,7 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '~web') }}
     environment: ${{ fromJSON('{"main":"prod"}')[github.ref_name] || github.ref_name }}
     env:
+      K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
       PORT: ${{ vars.PORT }}
     steps:
       - name: Print Job Description
