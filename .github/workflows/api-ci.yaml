@@ -60,15 +60,20 @@ jobs:
       - name: Print Job Description
         run: |
           echo deploying \"$IMAGE\" from branch \"${{ github.ref_name }}\"
-      - name: Install SSH Key
-        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+      - name: Git Checkout
+        uses: actions/checkout@v3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-host: ${{ secrets.SSH_HOST }}
-      - name: Spin Up Docker Image
-        run: |
-          ssh root@${{ secrets.SSH_HOST }} \
-          docker run -d -p 8000:80/tcp \
-            -e PORT=$PORT \
-            -e PG_CONNECTION_STRING=$PG_CONNECTION_STRING \
-            $REGISTRY/$IMAGE:latest
+          ssh-key: ${{ secrets.GIT_SSH_KEY }}
+          submodules: recursive
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Add kubectl cert
+        run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.K8S_CLUSTER_ID }}
+      - name: Apply deployment changes
+        run: envsubst < $GITHUB_WORKSPACE/k8s/api-deploy.yaml | kubectl apply -f -
+      - name: Deploy Rollout
+        run: kubectl rollout restart deployment/$IMAGE --namespace $K8S_NAMESPACE
+      - name: Verify deployment
+        run: kubectl rollout status deployment/$IMAGE --namespace $K8S_NAMESPACE

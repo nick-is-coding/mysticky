@@ -7,6 +7,8 @@ import AddButton from './components/AddButton';
 import Modal from './components/Modal';
 import ThankYou from './components/ThankYou';
 
+const API_ENDPOINT = process.env.API_ENDPOINT;
+
 function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +20,7 @@ function App() {
   const [isNoteAdded, setIsNoteAdded] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5002/users')
+    axios.get(`${API_ENDPOINT}/users`)
       .then(response => {
         setStickyNotes(response.data);
       })
@@ -56,7 +58,7 @@ function App() {
       color: colors[Math.floor(Math.random() * colors.length)]
     };
   
-    axios.post('http://localhost:5002/users', newNote)
+    axios.post(`${API_ENDPOINT}/users`, newNote)
       .then(response => {
         console.log(response.data.message);
         console.log(response.data.newNoteId);
@@ -70,7 +72,7 @@ function App() {
         setNewNoteText('');
         setIsModalOpen(false);
 
-        axios.put(`http://localhost:5002/users/${response.data.newNoteId}`, { color: newNote.color })
+        axios.put(`${API_ENDPOINT}/users/${response.data.newNoteId}`, { color: newNote.color })
       .then(response => {
           console.log(response.data.message);
         })
@@ -85,7 +87,7 @@ function App() {
   
   
   const handleNoteDelete = (id) => {
-    return axios.delete(`http://localhost:5002/users/${id}`)
+    return axios.delete(`${API_ENDPOINT}/users/${id}`)
       .then(response => {
         console.log(response.data.message);
         setStickyNotes(stickyNotes.filter(note => note.id !== id));
