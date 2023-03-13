@@ -7,6 +7,8 @@ RUN npm install
 FROM base as pre-build
 COPY src/web/src ./src
 COPY src/web/public ./public
+COPY src/web/config-overrides.js ./
+COPY src/web/jsconfig.json ./
 
 FROM pre-build as build
 ARG API_ENDPOINT
