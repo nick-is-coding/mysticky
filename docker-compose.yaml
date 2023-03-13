@@ -7,7 +7,7 @@ services:
     env_file:
       - src/web/.env
     ports:
-      - "$PORT:$PORT"
+      - "8000:80"
 
   api:
     build:
