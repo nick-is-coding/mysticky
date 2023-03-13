@@ -28,7 +28,7 @@ jobs:
     env:
       API_ENDPOINT: ${{ vars.API_ENDPOINT }}
       GENERATE_SOURCEMAP: ${{ vars.GENERATE_SOURCEMAP }}
-      K8S_NAMESPACE: ${{ vars.K8S_NAMESPACE }}
+      K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
     steps:
       - name: Print Job Description
         run: |
