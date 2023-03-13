@@ -123,7 +123,7 @@ function App() {
           </div>
           <AddButton onClick={toggleModal} />
           <div className='sticky-note-container'>
-            {stickyNotes.map((note) => (
+            {stickyNotes.reverse().map((note) => (
               <StickyNote
                 className='sticky-container'
                 key={note.id}
