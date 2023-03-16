@@ -89,7 +89,6 @@ body {
 
 .sticky-content {
   padding: 1rem;
-  height: 35vw;
   overflow-y: auto;
   word-wrap: break-word;
   font-size: 1.2em;
